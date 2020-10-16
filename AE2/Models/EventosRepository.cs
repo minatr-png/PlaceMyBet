@@ -22,7 +22,7 @@ namespace AE2.Models
         {
             MySqlConnection con  = Connect();
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "select * from eventos";
+            command.CommandText  = "select * from eventos";
 
             try
             {
@@ -38,6 +38,32 @@ namespace AE2.Models
                 return eves;
             }
             catch(MySqlException e)
+            {
+                Debug.WriteLine("Se ha producido un error: " + e);
+                return null;
+            }
+        }
+
+        internal List<EventosDTO> RetrieveDTO()
+        {
+            MySqlConnection con  = Connect();
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText  = "select * from eventos";
+
+            try
+            {
+                con.Open();
+                MySqlDataReader res = command.ExecuteReader();
+
+                List<EventosDTO> eves = new List<EventosDTO>();
+
+                while (res.Read()) eves.Add(new EventosDTO(res.GetString(1), res.GetString(2), res.GetDateTime(3)));
+
+                con.Close();
+
+                return eves;
+            }
+            catch (MySqlException e)
             {
                 Debug.WriteLine("Se ha producido un error: " + e);
                 return null;

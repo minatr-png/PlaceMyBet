@@ -11,11 +11,11 @@ namespace AE2.Controllers
     public class MercadosController : ApiController
     {
         // GET: api/Mercados
-        public IEnumerable<Mercados> Get()
+        public IEnumerable<MercadosDTO> Get()
         {
             var repo = new MercadosRepository();
 
-            List<Mercados> mercs = repo.Retrieve();
+            List<MercadosDTO> mercs = repo.RetrieveDTO();
 
             return mercs;
         }

@@ -20,4 +20,18 @@ namespace AE2.Models
         public string   nomVisitante { get; set; }
         public DateTime fecha        { get; set; }
     }
+
+    public class EventosDTO
+    {
+        public EventosDTO(string nomLocal, string nomVisitante, DateTime fecha)
+        {
+            this.nomLocal     = nomLocal;
+            this.nomVisitante = nomVisitante;
+            this.fecha        = fecha;
+        }
+
+        public string nomLocal     { get; set; }
+        public string nomVisitante { get; set; }
+        public DateTime fecha      { get; set; }
+    }
 }

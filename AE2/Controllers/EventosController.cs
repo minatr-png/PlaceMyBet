@@ -11,11 +11,11 @@ namespace AE2.Controllers
     public class EventosController : ApiController
     {
         // GET: api/Eventos
-        public IEnumerable<Eventos> Get()
+        public IEnumerable<EventosDTO> Get()
         {
             var repo = new EventosRepository();
 
-            List<Eventos> eves = repo.Retrieve();
+            List<EventosDTO> eves = repo.RetrieveDTO();
 
             return eves;
         }

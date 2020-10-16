@@ -42,5 +42,31 @@ namespace AE2.Models
                 return null;
             }
         }
+
+        internal List<MercadosDTO> RetrieveDTO()
+        {
+            MySqlConnection con = Connect();
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "select * from mercados";
+
+            try
+            {
+                con.Open();
+                MySqlDataReader res = command.ExecuteReader();
+
+                List<MercadosDTO> mercs = new List<MercadosDTO>();
+
+                while (res.Read()) mercs.Add(new MercadosDTO(res.GetInt32(1), res.GetFloat(2), res.GetFloat(3)));
+
+                con.Close();
+
+                return mercs;
+            }
+            catch (MySqlException e)
+            {
+                Debug.WriteLine("Se ha producido un error: " + e);
+                return null;
+            }
+        }
     }
 }

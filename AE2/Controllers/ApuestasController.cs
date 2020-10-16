@@ -11,11 +11,11 @@ namespace AE2.Controllers
     public class ApuestasController : ApiController
     {
         // GET: api/Apuestas
-        public IEnumerable<Apuestas> Get()
+        public IEnumerable<ApuestasDTO> Get()
         {
             var repo = new ApuestasRepository();
 
-            List<Apuestas> apus = repo.Retrieve();
+            List<ApuestasDTO> apus = repo.RetrieveDTO();
 
             return apus;
         }
@@ -27,8 +27,10 @@ namespace AE2.Controllers
         }
 
         // POST: api/Apuestas
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Apuestas apuesta)
         {
+            var repo = new ApuestasRepository();
+            repo.Save(apuesta);
         }
 
         // PUT: api/Apuestas/5
