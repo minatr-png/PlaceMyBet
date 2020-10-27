@@ -14,9 +14,15 @@ namespace AE2.Controllers
         public IEnumerable<MercadosDTO> Get()
         {
             var repo = new MercadosRepository();
-
             List<MercadosDTO> mercs = repo.RetrieveDTO();
+            return mercs;
+        }
 
+        // GET: api/Mercados?eventoMer=valor1&tipo=valor2
+        public IEnumerable<MercadosDTO> GetEventoTipo(int eventoMer, int tipo)
+        {
+            var repo = new MercadosRepository();
+            List<MercadosDTO> mercs = repo.RetrieveByEventoAndTipo(eventoMer, tipo);
             return mercs;
         }
 

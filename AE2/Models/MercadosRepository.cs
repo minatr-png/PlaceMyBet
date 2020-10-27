@@ -33,7 +33,6 @@ namespace AE2.Models
                 while (res.Read()) mercs.Add(new Mercados(res.GetInt32(0), res.GetInt32(1), res.GetFloat(2), res.GetFloat(3), res.GetFloat(4), res.GetFloat(5), res.GetInt32(6)));
 
                 con.Close();
-
                 return mercs;
             }
             catch (MySqlException e)
@@ -59,7 +58,33 @@ namespace AE2.Models
                 while (res.Read()) mercs.Add(new MercadosDTO(res.GetInt32(1), res.GetFloat(2), res.GetFloat(3)));
 
                 con.Close();
+                return mercs;
+            }
+            catch (MySqlException e)
+            {
+                Debug.WriteLine("Se ha producido un error: " + e);
+                return null;
+            }
+        }
 
+        internal List<MercadosDTO> RetrieveByEventoAndTipo(int evento, int tipo)
+        {
+            MySqlConnection con = Connect();
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "SELECT * FROM mercados WHERE eventoMer = @A AND tipo = @A2;";
+            command.Parameters.AddWithValue("@A", evento);
+            command.Parameters.AddWithValue("@A2", tipo);
+
+            try
+            {
+                con.Open();
+                MySqlDataReader res = command.ExecuteReader();
+
+                List<MercadosDTO> mercs = new List<MercadosDTO>();
+
+                while (res.Read()) mercs.Add(new MercadosDTO(res.GetInt32(1), res.GetFloat(2), res.GetFloat(3)));
+
+                con.Close();
                 return mercs;
             }
             catch (MySqlException e)
