@@ -69,6 +69,33 @@ namespace AE2.Models
             }
         }
 
+        internal List<ApuestasDTO> RetrieveByEmailAndMercado(int mercado, string email)
+        {
+            MySqlConnection con = Connect();
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "SELECT * FROM apuestas WHERE mercadoApu = @A AND emailUsu = @A2;";
+            command.Parameters.AddWithValue("@A", mercado);
+            command.Parameters.AddWithValue("@A2", email);
+
+            try
+            {
+                con.Open();
+                MySqlDataReader res = command.ExecuteReader();
+
+                List<ApuestasDTO> apus = new List<ApuestasDTO>();
+
+                while (res.Read()) apus.Add(new ApuestasDTO(res.GetInt32(2), res.GetInt32(3), res.GetInt32(4), res.GetString(7)));
+
+                con.Close();
+                return apus;
+            }
+            catch (MySqlException e)
+            {
+                Debug.WriteLine("Se ha producido un error: " + e);
+                return null;
+            }
+        }
+
         internal void Save(Apuestas apu)
         {
             MySqlConnection con = Connect();

@@ -14,9 +14,15 @@ namespace AE2.Controllers
         public IEnumerable<ApuestasDTO> Get()
         {
             var repo = new ApuestasRepository();
-
             List<ApuestasDTO> apus = repo.RetrieveDTO();
+            return apus;
+        }
 
+        // GET: api/Apuestas?emailUsu=valor1&mercadoApu=valor2
+        public IEnumerable<ApuestasDTO> GetEmailMercado(int mercadoApu, string emailUsu)
+        {
+            var repo = new ApuestasRepository();
+            List<ApuestasDTO> apus = repo.RetrieveByEmailAndMercado(mercadoApu, emailUsu);
             return apus;
         }
 
