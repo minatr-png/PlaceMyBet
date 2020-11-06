@@ -11,6 +11,7 @@ namespace AE2.Controllers
     public class ApuestasController : ApiController
     {
         // GET: api/Apuestas
+        [Authorize(Roles = "Admin")]
         public IEnumerable<ApuestasDTO> Get()
         {
             var repo = new ApuestasRepository();
@@ -19,7 +20,6 @@ namespace AE2.Controllers
         }
 
         // GET: api/Apuestas?emailUsu=valor1&mercadoApu=valor2
-        [Authorize(Roles="Admin")]
         public IEnumerable<ApuestasMercadoEmail> GetMercadoEmail(int mercadoApu, string emailUsu)
         {
             var repo = new ApuestasRepository();
