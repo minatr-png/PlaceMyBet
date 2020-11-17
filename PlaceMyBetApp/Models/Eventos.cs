@@ -34,4 +34,20 @@ namespace AE2.Models
         public string nomVisitante { get; set; }
         public DateTime fecha      { get; set; }
     }
+
+    /***Ejercicio 2***/
+    public class EventosExamen
+    {
+        public EventosExamen(string local, string visitante, float mercado)
+        {
+            this.local     = local;
+            this.visitante = visitante;
+            this.mercado   = mercado;
+        }
+
+        public string  local    { get; set; }
+        public string visitante { get; set; }
+        public float  mercado   { get; set; }
+    }
+    /***Final Ejercicio 2(solo de la clase hay más en repository y en controller)***/
 }

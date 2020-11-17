@@ -30,10 +30,14 @@ namespace AE2.Controllers
             return null;
         }
 
+        /***Ejercicio 2***/
         // POST: api/Eventos
-        public void Post([FromBody]string value)
+        public void Post([FromBody]EventosExamen evento)
         {
+            var repo = new EventosRepository();
+            repo.Save(evento);
         }
+        /***Final Ejercicio 1(solo del controller hay más en repository y en la clase)***/
 
         // PUT: api/Eventos/5
         public void Put(int id, [FromBody]string value)

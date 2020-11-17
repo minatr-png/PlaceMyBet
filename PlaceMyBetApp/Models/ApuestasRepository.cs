@@ -100,7 +100,7 @@ namespace AE2.Models
         {
             MySqlConnection con = Connect();
             MySqlCommand command = con.CreateCommand();
-
+            
             command.CommandText = "SELECT apu.overUnder, mer.cuotaOver, mer.cuotaUnder, mer.dineroOver, mer.dineroUnder, apu.tipo FROM apuestas apu INNER JOIN mercados mer WHERE apu.idApuesta = 1 AND mer.idMercado = apu.mercadoApu;";
 
             try

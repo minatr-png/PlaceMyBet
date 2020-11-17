@@ -69,5 +69,32 @@ namespace AE2.Models
                 return null;
             }
         }
+
+        /***Ejercicio 2***/
+        internal void Save(EventosExamen eve)
+        {
+            MySqlConnection con = Connect();
+            MySqlCommand command = con.CreateCommand();
+            
+            command.CommandText = "INSERT INTO eventos (nomLocal, nomVisitante, fecha) VALUES ('" + eve.local + "', '" + eve.visitante + "','2999-05-30');";
+            try
+            {
+                con.Open();
+                command.ExecuteNonQuery();
+                con.Close();
+
+                MySqlCommand command2 = con.CreateCommand();
+                command2.CommandText = "INSERT INTO mercados (tipo, cuotaOver, cuotaUnder, dineroOver, dineroUnder, eventoMer) VALUES ("+ eve.mercado +", 1, 1, 100, 100, LAST_INSERT_ID());";
+                try
+                {
+                    con.Open();
+                    command2.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (MySqlException e) { Debug.WriteLine("Se ha producido un error de conexión"); }
+            }
+            catch (MySqlException e) { Debug.WriteLine("Se ha producido un error de conexión"); }
+        }
+        /***Final Ejercicio 2(solo del repository hay más en controller y en la clase)***/
     }
 }
